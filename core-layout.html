@@ -7,30 +7,34 @@ license that can be found in the LICENSE file.
 /**
  * @group Polymer Core Elements
  *
- * core-layout provides a helper to use CSS3 Flexible Boxes.  Placing a
- * core-layout inside an element allows it to use a set of css selectors
- * to easily apply flexbox styling.
+ * The `core-layout` element provides a helper to use 
+ * [CSS3 Flexible Boxes](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes).
+ * Placing a `core-layout` inside an element allows it to use a set of css
+ * selectors to easily apply flexbox styling.
  * 
- * Apply the core-layout class to make an element a flexible box.
+ * Apply the `h-box` class to make an element a horizontal flexible box and
+ * the `v-box` class to make it vertical.
  * 
- * Apply the layout-v class to make the element a columnar box.
+ * To make a particular element flexible, use the `flex` class. This is the 
+ * same as making the element flex: 1. You can also set `flex2` through `flex5`.
+ * For other values, apply the css manually.
  * 
- * To make a particular element flexible, use the layout-flex class. This is the 
- * same as making the element flex: 1. You'll need to create other css classes
- * to apply other values of flex.
+ * It's common in flexbox parlance to hear the term 'main' and 'cross' axis.
+ * For an `h-box` the main axis is horizontal and the cross axis is vertical.
+ * It's the reverse for a 'v-box'.
+ *
+ * To effect alignment in the main axis, use `justify-start`, `justify-center`, 
+ * `justify-end`, and `justify-between`.
  * 
- * To effect alignment in the main axis, use layout-start, layout-center, 
- * layout-end, and layout-between.
- * 
- * To effect alignment in the cross axis, use layout-x-start, layout-x-center, 
- * layout-x-end.
+ * To effect alignment in the cross axis, use `align-start`, `align-center`, 
+ * `align-end`.
  *
  * Examples:
  *
  *     <core-layout></core-layout>
- *     <div class="core-layout">
-  *       <div>Left</div>
- *       <div class="layout-flex">Main</div>
+ *     <div class="h-box">
+ *       <div>Left</div>
+ *       <div class="flex">Main</div>
  *       <div>Right</div>
  *     </div>
  *
@@ -41,9 +45,9 @@ license that can be found in the LICENSE file.
  *     ---------------------------------
  *
  *     <core-layout></core-layout>
- *     <div class="core-layout layout-v">
+ *     <div class="v-box">
   *      <div>Header</div>
- *       <div class="layout-flex">Body</div>
+ *       <div class="flex">Body</div>
  *       <div>Footer</div>
  *     </div>
  *
@@ -63,8 +67,35 @@ license that can be found in the LICENSE file.
  *     ||------||
  *     ----------
  *
+ * Justify:
+ *     <core-layout></core-layout>
+ *     <div class="h-box justify-end">
+ *       <div>Left</div>
+ *       <div>Main</div>
+ *       <div>Right</div>
+ *     </div>
  *
+ *     ---------------------------------
+ *     |-------------------------------|
+ *     ||              Left|Main|Right||
+ *     |-------------------------------|
+ *     ---------------------------------
  * 
+ * Align:
+ *     <core-layout></core-layout>
+ *     <div class="h-box align-center">
+ *       <div>Left</div>
+ *       <div class="flex">Main</div>
+ *       <div>Right</div>
+ *     </div>
+ *
+ *     ---------------------------------
+ *     |-------------------------------|
+ *     ||    |                  |     ||
+ *     ||Left|       Main       |Right||
+ *     ||    |                  |     ||
+ *     |-------------------------------|
+ *     ---------------------------------
  *
  * @element core-layout
  */
@@ -74,43 +105,6 @@ license that can be found in the LICENSE file.
  * its styling.
  *
  * @attribute host
- * @type boolean
- * @default false
- */
-/**
- * Defines the default for how flex items are laid out along the cross axis on 
- * the current line.  Possible values are 'start', 'center' and 'end'.
- *
- * @attribute align
- * @type string
- * @default ''
- */
-/**
- * Defines how flex items are laid out along the main axis on the current line.
- * Possible values are 'start', 'center' and 'end'.
- *
- * @attribute justify
- * @type string
- * @default ''
- */
-/**
- * If true, core-layout is the flex container.
- *
- * Example:
- *
- *     <core-layout isContainer>
- *       <div>Left</div>
- *       <div flex>Main</div>
- *       <div>Right</div>
- *     </core-layout>
- *
- *     ---------------------------------
- *     |-------------------------------|
- *     ||Left|       Main       |Right||
- *     |-------------------------------|
- *     ---------------------------------
- *
- * @attribute isContainer
  * @type boolean
  * @default false
  */
