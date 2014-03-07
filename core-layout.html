@@ -133,42 +133,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // NOTE: include template so that styles are loaded, but remove
       // so that we can decide dynamically what part to include
       registerCallback: function(polymerElement) {
-        this.template = polymerElement.querySelector('template');
+        var template = polymerElement.querySelector('template');
+        this.styles = template.content.querySelectorAll('style').array();
+        this.styles.forEach(function(s) {
+          s.removeAttribute('no-shim');
+        })
       },
   
       fetchTemplate: function() {
         return null;
       },
   
-      ready: function() {
-        var frag = document.createDocumentFragment()
-        var content = this.template.content;
-        frag.appendChild(content.firstElementChild.cloneNode(true));
-        if (this.hasAttribute('host')) {
-          frag.appendChild(content.lastElementChild.cloneNode(true));
-        }
-        if (!window.ShadowDOMPolyfill) {
-          this.appendChild(frag);
-        }
-        this.content = frag;
-      },
       attached: function() {
-        if (window.ShadowDOMPolyfill) {
-          var attr = 'no-shim';
-          Array.prototype.forEach.call(this.content.children, function(n) {
-            n.removeAttribute(attr);
-          });
-          Platform.ShadowCSS.shimStyling(this.content, calcScopeName(this));
+        this.installScopeStyle(this.styles[0]);
+        if (this.hasAttribute('host')) {
+          this.installScopeStyle(this.styles[1], 'host');
         }
       }
-    });
 
-    function calcScopeName(node) {
-      while (node.parentNode) {
-        node = node.parentNode;
-      }
-      return node.host ? node.host.localName : '';
-    }
+    });
 
   })();
   </script>
