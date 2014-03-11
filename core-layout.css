@@ -32,6 +32,14 @@ license that can be found in the LICENSE file.
   position: relative;
 }
 
+.fit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
 .flex, .flex1 {
   -webkit-box-flex: 1;
   -ms-flex: 1;
