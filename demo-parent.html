@@ -32,8 +32,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <template>
       <style>
         div {
-          box-sizing: border-box;
-          -moz-box-sizing: border-box;
+          box-sizing: border-flow;
+          -moz-flow-sizing: border-flow;
           border: 2px solid #ccc;
         }
 
@@ -50,16 +50,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           border: none;
         }
       </style>
-      <link rel="stylesheet" href="core-layout.css">
-      <link rel="stylesheet" href="core-layout-host.css">
-      <div core-flex core-flow="h">
+      <core-layout host></core-layout>
+      <div core-flex>
+        <core-layout></core-layout>
         <div>Hi I'm some content</div>
-        <div core-flex core-flow="v">
-          <div core-flow="h" core-align="center">
+        <div core-flex>
+          <core-layout flow="v"></core-layout>
+          <div>
+            <core-layout align="center"></core-layout>
             <h3>Title</h3>
             <button>hello</button>
           </div>
-          <div core-flex core-flow="h">
+          <div core-flex>
+            <core-layout></core-layout>
             <div core-flex core-contain>
               Main content
               <div class="abs">abs pos :)</div>
@@ -67,7 +70,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div>Sidebar content</div>
           </div>
           <div>Some more stuffs...</div>
-          <div core-flow="h" core-justify="end">
+          <div>
+            <core-layout justify="end"></core-layout>
             <b>Footer</b>
           </div>
         </div>

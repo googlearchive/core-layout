@@ -16,31 +16,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  * Placing a `core-layout` inside an element allows it to use a set of css
  * selectors to easily apply flexbox styling.
  * 
- * Apply the `h-box` class to make an element a horizontal flexible box and
- * the `v-box` class to make it vertical.
- * 
- * To make a particular element flexible, use the `flex` class. This is the 
- * same as making the element flex: 1. You can also set `flex2` through `flex5`.
- * For other values, apply the css manually.
+ * The core-layout element applies layout to itself if it has children or to
+ * its parent element, if it does not.
+ *
+ * Elements can flow (layout) horizontally, such that their items are stack
+ * left to right or vertically, such that their items stack top to bottom. The
+ * default is horizontal flow. Setting flow to `h` or `v` controls this. 
+ *
+ * To make a particular element flexible, use the `core-flex` attribute.
+ * You can control flexibility from 1 to 5 by giving the attribute a
+ * corresponding value. For other values, apply the css manually.
  * 
  * It's common in flexbox parlance to hear the term 'main' and 'cross' axis.
- * For an `h-box` the main axis is horizontal and the cross axis is vertical.
- * It's the reverse for a 'v-box'.
+ * For an `h` flow the main axis is horizontal and the cross axis is vertical.
+ * It's the reverse for a `v` flow.
  *
- * To effect alignment in the main axis, use `justify-start`, `justify-center`, 
- * `justify-end`, and `justify-between`.
+ * To effect alignment in the main axis, use the `justify` attribute. The 
+ * supported values are `start`, `center`, `end`, and `between`.
  * 
- * To effect alignment in the cross axis, use `align-start`, `align-center`, 
- * `align-end`.
+ * To effect alignment in the cross axis, use the `align` attribute. The
+ * supported values are `start`, `center`, and `end`.
+ *
+ * Note, it's also possible to include the core-layout.css stylesheet separate
+ * from the core-layout element. Including the element automatically includes
+ * the stylesheet. To use the stylesheet independent of the element, the same
+ * attributes can be used but they should be prefixed with `core-`.
  *
  * Examples:
  *
- *     <core-layout></core-layout>
- *     <div class="h-box">
+ *     <core-layout flow="h">
  *       <div>Left</div>
- *       <div class="flex">Main</div>
+ *       <div core-flex>Main</div>
  *       <div>Right</div>
- *     </div>
+ *     </core-layout>
  *
  *     ---------------------------------
  *     |-------------------------------|
@@ -48,12 +56,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  *     |-------------------------------|
  *     ---------------------------------
  *
- *     <core-layout></core-layout>
- *     <div class="v-box">
-  *      <div>Header</div>
- *       <div class="flex">Body</div>
+ *     <core-layout flow="v">
+ *       <div>Header</div>
+ *       <div core-flex>Body</div>
  *       <div>Footer</div>
- *     </div>
+ *     </core-layout>
  *
  *     ----------
  *     ||------||
@@ -72,12 +79,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  *     ----------
  *
  * Justify:
- *     <core-layout></core-layout>
- *     <div class="h-box justify-end">
- *       <div>Left</div>
+ *
+ *     <core-layout flow="h" justify="end">
+ *       <div core-flex>Left</div>
  *       <div>Main</div>
  *       <div>Right</div>
- *     </div>
+ *     </core-layout>
  *
  *     ---------------------------------
  *     |-------------------------------|
@@ -86,18 +93,49 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  *     ---------------------------------
  * 
  * Align:
- *     <core-layout></core-layout>
- *     <div class="h-box align-center">
+ *
+ *     <core-layout flow="h" align="center">
  *       <div>Left</div>
- *       <div class="flex">Main</div>
+ *       <div core-flex>Main</div>
  *       <div>Right</div>
- *     </div>
+ *     </core-layout>
  *
  *     ---------------------------------
  *     |-------------------------------|
  *     ||    |                  |     ||
  *     ||Left|       Main       |Right||
  *     ||    |                  |     ||
+ *     |-------------------------------|
+ *     ---------------------------------
+ *
+ *
+ * To style a parent element place the core layout inside it:
+ *
+ *     <some-element>
+ *       <core-layout flow="h"></core-layout>
+ *       <div>Left</div>
+ *       <div core-flex>Main</div>
+ *       <div>Right</div>
+ *     <some-element>
+ *
+ *     ---------------------------------
+ *     |-------------------------------|
+ *     ||Left|       Main       |Right||
+ *     |-------------------------------|
+ *     ---------------------------------
+ *
+ * To style an element using only the core-layout stylesheet:
+ *
+ *     <link rel="stylesheet" href="../core-layout/core-layout.css">
+ *     <div core-flow="h" core-justify="end">
+ *       <div core-flex>Left</div>
+ *       <div>Main</div>
+ *       <div>Right</div>  
+ *     </div>
+ *
+ *     ---------------------------------
+ *     |-------------------------------|
+ *     ||              Left|Main|Right||
  *     |-------------------------------|
  *     ---------------------------------
  *
@@ -115,7 +153,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <link rel="import" href="../polymer/polymer.html">
 
-<polymer-element name="core-layout">
+<polymer-element name="core-layout" attributes="flow justify align isContainer">
   
   <template>
   
@@ -129,6 +167,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   (function() {
   
     Polymer('core-layout', {
+
+      isContainer: false,
+      /**
+       * Controls how the element lays out or flows. Set to `h` for a 
+       * horizontal flow or `v` for a vertical flow. 
+       *
+       * @attribute `flow`
+       * @type string `h`|`v`
+       * @default ''
+       */
+      flow: '',
+      /**
+       * Controls how the items are aligned in the flow direction. For 
+       * example for a flow of `h`, this controls how each item is aligned
+       * horizontally.
+       *
+       * @attribute `justify`
+       * @type string `start`|`center`|`end`|`between`
+       * @default ''
+       */
+      justify: '',
+      /**
+       * Controls how the items are aligned in cross-flow direction. For 
+       * example for a flow of `h`, this controls how each item is aligned
+       * vertically.
+       *
+       * @attribute `align`
+       * @type string `start`|`center`|`end`
+       * @default ''
+       */
+      align: '',
+      /**
+       * Controls whether or not the items layout in reverse order.
+       *
+       * @attribute `reverse`
+       * @type boolean
+       * @default false
+       */
+      reverse: false,
+      layoutPrefix: 'core-',
   
       // NOTE: include template so that styles are loaded, but remove
       // so that we can decide dynamically what part to include
@@ -146,9 +224,49 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   
       attached: function() {
         this.installScopeStyle(this.styles[0]);
-        if (this.hasAttribute('host')) {
+        var host = this.hasAttribute('host'), container;
+        if (host) {
           this.installScopeStyle(this.styles[1], 'host');
+          container = this.findStyleScope().host || document.body;
+        } else {
+          if (this.children.length) {
+            this.isContainer = true;
+          }
+          container = this.isContainer ? this : this.parentNode;  
         }
+        this.layoutContainer = container;
+      },
+
+      leftView: function() {
+        this.layoutContainer = null;
+      },
+
+      layoutContainerChanged: function(old) {
+        this.style.display = this.layoutContainer === this ? null : 'none';
+        this.flowChanged();
+        this.alignChanged();
+        this.justifyChanged();
+      },
+      setLayoutAttribute: function(name, value) {
+        if (this.layoutContainer && name) {
+          if (value) {
+            this.layoutContainer.setAttribute(this.layoutPrefix + name, value);
+          } else {
+            this.layoutContainer.removeAttribute(name);
+          }
+        }
+      },
+
+      flowChanged: function() {
+        this.setLayoutAttribute('flow', this.flow || 'h');
+      },
+
+      alignChanged: function() {
+        this.setLayoutAttribute('align', this.align);
+      },
+
+      justifyChanged: function() {
+        this.setLayoutAttribute('justify', this.justify);
       }
 
     });
