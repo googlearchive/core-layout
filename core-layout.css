@@ -56,6 +56,10 @@ license that can be found in the LICENSE file.
   width: 100%;
 }
 
+body[core-fit] {
+  margin: 0;
+}
+
 [core-flex] {
   -webkit-box-flex: 1;
   -ms-flex: 1;
