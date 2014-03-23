@@ -229,20 +229,20 @@ You may also use the `core-layout` stylesheet directly:
   
       attached: function() {
         this.installScopeStyle(this.styles[0]);
-        var host = this.hasAttribute('host'), container;
-        if (host) {
+        if (this.children.length) {
+          this.isContainer = true;
+        }
+        var container = this.isContainer ? this : this.parentNode;  
+        // detect if laying out a shadowRoot host.
+        var forHost = container instanceof ShadowRoot;
+        if (forHost) {
           this.installScopeStyle(this.styles[1], 'host');
-          container = this.findStyleScope().host || document.body;
-        } else {
-          if (this.children.length) {
-            this.isContainer = true;
-          }
-          container = this.isContainer ? this : this.parentNode;  
+          container = container.host || document.body;
         }
         this.layoutContainer = container;
       },
 
-      leftView: function() {
+      detached: function() {
         this.layoutContainer = null;
       },
 
