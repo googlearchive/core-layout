@@ -8,148 +8,153 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <!--
-/**
- * @group Polymer Core Elements
- *
- * The `core-layout` element provides a helper to use 
- * [CSS3 Flexible Boxes](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes).
- * Placing a `core-layout` inside an element allows it to use a set of css
- * selectors to easily apply flexbox styling.
- * 
- * The core-layout element applies layout to itself if it has children or to
- * its parent element, if it does not.
- *
- * Elements can flow (layout) horizontally, such that their items are stack
- * left to right or vertically, such that their items stack top to bottom. The
- * default is horizontal flow. Setting flow to `h` or `v` controls this. 
- *
- * To make a particular element flexible, use the `core-flex` attribute.
- * You can control flexibility from 1 to 5 by giving the attribute a
- * corresponding value. For other values, apply the css manually.
- * 
- * It's common in flexbox parlance to hear the term 'main' and 'cross' axis.
- * For an `h` flow the main axis is horizontal and the cross axis is vertical.
- * It's the reverse for a `v` flow.
- *
- * To effect alignment in the main axis, use the `justify` attribute. The 
- * supported values are `start`, `center`, `end`, and `between`.
- * 
- * To effect alignment in the cross axis, use the `align` attribute. The
- * supported values are `start`, `center`, and `end`.
- *
- * Note, it's also possible to include the core-layout.css stylesheet separate
- * from the core-layout element. Including the element automatically includes
- * the stylesheet. To use the stylesheet independent of the element, the same
- * attributes can be used but they should be prefixed with `core-`.
- *
- * Examples:
- *
- *     <core-layout flow="h">
- *       <div>Left</div>
- *       <div core-flex>Main</div>
- *       <div>Right</div>
- *     </core-layout>
- *
- *     ---------------------------------
- *     |-------------------------------|
- *     ||Left|       Main       |Right||
- *     |-------------------------------|
- *     ---------------------------------
- *
- *     <core-layout flow="v">
- *       <div>Header</div>
- *       <div core-flex>Body</div>
- *       <div>Footer</div>
- *     </core-layout>
- *
- *     ----------
- *     ||------||
- *     ||Header||
- *     ||------||
- *     ||Body  ||
- *     ||      ||
- *     ||      ||
- *     ||      ||
- *     ||      ||
- *     ||      ||
- *     ||      ||
- *     ||------||
- *     ||Footer||
- *     ||------||
- *     ----------
- *
- * Justify:
- *
- *     <core-layout flow="h" justify="end">
- *       <div core-flex>Left</div>
- *       <div>Main</div>
- *       <div>Right</div>
- *     </core-layout>
- *
- *     ---------------------------------
- *     |-------------------------------|
- *     ||              Left|Main|Right||
- *     |-------------------------------|
- *     ---------------------------------
- * 
- * Align:
- *
- *     <core-layout flow="h" align="center">
- *       <div>Left</div>
- *       <div core-flex>Main</div>
- *       <div>Right</div>
- *     </core-layout>
- *
- *     ---------------------------------
- *     |-------------------------------|
- *     ||    |                  |     ||
- *     ||Left|       Main       |Right||
- *     ||    |                  |     ||
- *     |-------------------------------|
- *     ---------------------------------
- *
- *
- * To style a parent element place the core layout inside it:
- *
- *     <some-element>
- *       <core-layout flow="h"></core-layout>
- *       <div>Left</div>
- *       <div core-flex>Main</div>
- *       <div>Right</div>
- *     <some-element>
- *
- *     ---------------------------------
- *     |-------------------------------|
- *     ||Left|       Main       |Right||
- *     |-------------------------------|
- *     ---------------------------------
- *
- * To style an element using only the core-layout stylesheet:
- *
- *     <link rel="stylesheet" href="../core-layout/core-layout.css">
- *     <div core-flow="h" core-justify="end">
- *       <div core-flex>Left</div>
- *       <div>Main</div>
- *       <div>Right</div>  
- *     </div>
- *
- *     ---------------------------------
- *     |-------------------------------|
- *     ||              Left|Main|Right||
- *     |-------------------------------|
- *     ---------------------------------
- *
- * @element core-layout
- */
-/**
- * If true, the host element of the core-layout element becomes a 
- * flexbox. Apply additional layout classes to the host element to customize
- * its styling.
- *
- * @attribute host
- * @type boolean
- * @default false
- */
+@group Polymer Core Elements
+
+The `core-layout` element is a helper for using
+[CSS3 Flexible Boxes](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes).
+A `core-layout` element enables a set of css selectors for easy flexbox styling.
+
+Example:
+
+    <core-layout flow="h">
+      <div>Left</div>
+      <div core-flex>Main</div>
+      <div>Right</div>
+    </core-layout>
+
+ Renders something like this:
+
+    ---------------------------------
+    |-------------------------------|
+    ||Left|       Main       |Right||
+    |-------------------------------|
+    ---------------------------------
+
+__Note__: the `core-layout` element applies layout to itself if it has children or to
+its parent element, if it does not. This feature allows you to apply layout to an
+arbitrary parent.
+
+Elements can flow (layout) horizontally, such that their items are stack
+left to right or vertically, such that their items stack top to bottom. The
+default is horizontal flow. Set flow to `h` or `v`.
+
+To make a particular child _flexible_, use the `core-flex` attribute.
+You can control flexibility from 1 to 5 by giving the attribute a
+corresponding value. For other values, apply the css manually.
+
+It's common in flexbox parlance to hear the terms _main axis_ and _cross axis_.
+For an `h` flow the main axis is horizontal and the cross axis is vertical.
+The axis are exchanged for a `v` flow.
+
+To effect alignment in the main axis, use the `justify` attribute. The 
+supported values are `start`, `center`, `end`, and `between`.
+
+To effect alignment in the cross axis, use the `align` attribute. The
+supported values are `start`, `center`, and `end`.
+
+Note, it's also possible to include the `core-layout.css` stylesheet separate
+from the `core-layout` element. Including the element automatically includes
+the stylesheet. To use the stylesheet independent of the element, the same
+attributes can be used but they should be prefixed with `core-`.
+
+More examples:
+
+    <core-layout flow="v">
+
+      <div>Header</div>
+      <div core-flex>Body</div>
+      <div>Footer</div>
+
+    </core-layout>
+
+    ----------
+    ||------||
+    ||Header||
+    ||------||
+    ||Body  ||
+    ||      ||
+    ||      ||
+    ||      ||
+    ||      ||
+    ||      ||
+    ||      ||
+    ||------||
+    ||Footer||
+    ||------||
+    ----------
+
+Justify:
+
+    <core-layout flow="h" justify="end">
+      <div core-flex>Left</div>
+      <div>Main</div>
+      <div>Right</div>
+    </core-layout>
+
+    ---------------------------------
+    |-------------------------------|
+    ||              Left|Main|Right||
+    |-------------------------------|
+    ---------------------------------
+
+Align:
+
+    <core-layout flow="h" align="center">
+      <div>Left</div>
+      <div core-flex>Main</div>
+      <div>Right</div>
+    </core-layout>
+
+    ---------------------------------
+    |-------------------------------|
+    ||    |                  |     ||
+    ||Left|       Main       |Right||
+    ||    |                  |     ||
+    |-------------------------------|
+    ---------------------------------
+
+
+To layout contents of a parent element, place a `core-layout` inside of it:
+
+    <some-element>
+      <core-layout flow="h"></core-layout>
+      <div>Left</div>
+      <div core-flex>Main</div>
+      <div>Right</div>
+    <some-element>
+
+    ---------------------------------
+    |-------------------------------|
+    ||Left|       Main       |Right||
+    |-------------------------------|
+    ---------------------------------
+
+You may also use the `core-layout` stylesheet directly:
+
+    <link rel="stylesheet" href="../core-layout/core-layout.css">
+    <div core-flow="h" core-justify="end">
+      <div core-flex>Left</div>
+      <div>Main</div>
+      <div>Right</div>  
+    </div>
+
+    ---------------------------------
+    |-------------------------------|
+    ||              Left|Main|Right||
+    |-------------------------------|
+    ---------------------------------
+
+@element core-layout
+
+-->
+<--
+ If true, the host element of the core-layout element becomes a 
+ flexbox. Apply additional layout classes to the host element to customize
+ its styling.
+ 
+ @attribute host
+ @type boolean
+ @default false
 -->
 <link rel="import" href="../polymer/polymer.html">
 
@@ -173,8 +178,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * Controls how the element lays out or flows. Set to `h` for a 
        * horizontal flow or `v` for a vertical flow. 
        *
-       * @attribute `flow`
-       * @type string `h`|`v`
+       * @attribute flow
+       * @type string h|v
        * @default ''
        */
       flow: '',
@@ -183,8 +188,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * example for a flow of `h`, this controls how each item is aligned
        * horizontally.
        *
-       * @attribute `justify`
-       * @type string `start`|`center`|`end`|`between`
+       * @attribute justify
+       * @type string start|center|end|between
        * @default ''
        */
       justify: '',
@@ -193,15 +198,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
        * example for a flow of `h`, this controls how each item is aligned
        * vertically.
        *
-       * @attribute `align`
-       * @type string `start`|`center`|`end`
+       * @attribute align
+       * @type string start|center|end
        * @default ''
        */
       align: '',
       /**
        * Controls whether or not the items layout in reverse order.
        *
-       * @attribute `reverse`
+       * @attribute reverse
        * @type boolean
        * @default false
        */
