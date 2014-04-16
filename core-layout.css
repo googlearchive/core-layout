@@ -109,7 +109,7 @@ body.core-fit {
 }
 
 /* distributed elements */
-::content > .core-flex, ::content > [core-flex], {
+::content > .core-flex, ::content > [core-flex] {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   -moz-flex: 1;
