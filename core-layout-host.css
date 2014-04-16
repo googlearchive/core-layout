@@ -15,7 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   display: flex !important;
 }
   
-:host(.core-row) {
+:host(.core-h) {
   -webkit-box-orient: horizontal;
   -ms-flex-direction: row;
   -moz-flex-direction: row;
@@ -23,7 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   flex-direction: row;
 }
   
-:host(.core-vertical) {
+:host(.core-v) {
   -webkit-box-orient: vertical;
   -ms-flex-direction: column;
   -moz-flex-direction: column;
@@ -31,7 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   flex-direction: column;
 }
 
-:host(.core-row.core-reverse) {
+:host(.core-h.core-reverse) {
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   -moz-flex-direction: row-reverse;
@@ -39,7 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   flex-direction: row-reverse;
 }
   
-:host(.core-vertical.core-reverse) {
+:host(.core-v.core-reverse) {
   -webkit-box-direction: reverse;
   -ms-flex-direction: column-reverse;
   -moz-flex-direction: column-reverse;

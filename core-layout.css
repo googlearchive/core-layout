@@ -4,7 +4,7 @@ Use of this source code is governed by a BSD-style
 license that can be found in the LICENSE file.
 */
 
-.core-row, .core-column {
+.core-h, .core-v {
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: -moz-flex !important;
@@ -12,7 +12,7 @@ license that can be found in the LICENSE file.
   display: flex !important;
 }
 
-.core-row {
+.core-h {
   -webkit-box-orient: horizontal;
   -ms-flex-direction: row;
   -moz-flex-direction: row;
@@ -20,7 +20,7 @@ license that can be found in the LICENSE file.
   flex-direction: row;
 }
 
-.core-row.core-reverse {
+.core-h.core-reverse {
   -webkit-box-direction: reverse;
   -ms-flex-direction: row-reverse;
   -moz-flex-direction: row-reverse;
@@ -28,7 +28,7 @@ license that can be found in the LICENSE file.
   flex-direction: row-reverse;
 }
 
-.core-column {
+.core-v {
   -webkit-box-orient: vertical;
   -ms-flex-direction: column;
   -moz-flex-direction: column;
@@ -36,7 +36,7 @@ license that can be found in the LICENSE file.
   flex-direction: column;
 }
 
-.core-column.core-reverse {
+.core-v.core-reverse {
   -webkit-box-direction: reverse;
   -ms-flex-direction: column-reverse;
   -moz-flex-direction: column-reverse;
