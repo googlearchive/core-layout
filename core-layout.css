@@ -5,11 +5,11 @@ license that can be found in the LICENSE file.
 */
 
 .core-row, .core-column {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: flex;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: -moz-flex !important;
+  display: -webkit-flex !important;
+  display: flex !important;
 }
 
 .core-row {
@@ -68,6 +68,22 @@ body.core-fit {
   flex: 1;
 }
 
+.core-flex-auto, [core-flex-auto] {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  -moz-flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.core-flex-none, [core-flex-none] {
+  -webkit-box-flex: none;
+  -ms-flex: none;
+  -moz-flex: none;
+  -webkit-flex: none;
+  flex: none;
+}
+
 .core-flex1, [core-flex=1] {
   -webkit-box-flex: 1;
   -ms-flex: 1;
@@ -99,6 +115,22 @@ body.core-fit {
   -moz-flex: 1;
   -webkit-flex: 1;
   flex: 1;
+}
+
+::content > .core-flex-auto, ::content > [core-flex-auto] {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  -moz-flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+::content > .core-flex-none, ::content > [core-flex-none] {
+  -webkit-box-flex: none;
+  -ms-flex: none;
+  -moz-flex: none;
+  -webkit-flex: none;
+  flex: none;
 }
 
 ::content > .core-flex1, ::content > [core-flex=1] {
