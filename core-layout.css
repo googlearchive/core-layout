@@ -44,11 +44,11 @@ license that can be found in the LICENSE file.
   flex-direction: column-reverse;
 }
 
-.core-relative, [core-relative] {
+.core-relative {
   position: relative;
 }
 
-.core-fit, [core-fit] {
+.core-fit {
   position: absolute;
   top: 0;
   left: 0;
@@ -56,7 +56,7 @@ license that can be found in the LICENSE file.
   width: 100%;
 }
 
-body.core-fit, body[core-fit] {
+body.core-fit {
   margin: 0;
 }
 
