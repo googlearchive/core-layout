@@ -1,4 +1,4 @@
 core-layout
 ===========
 
-DEPRECATED (in favor of layout attributes)
+## DEPRECATED (in favor of layout attributes)
